@@ -10,6 +10,12 @@ export default function ShakeDetector() {
   const [snow, setSnow] = useState(false);
 
   useEffect(() => {
+    if(snow) {
+      playSound();
+    }
+  }, [snow]);
+
+  useEffect(() => {
     if (!enabled) return;
 
     let lastX = null,
@@ -30,7 +36,6 @@ export default function ShakeDetector() {
 
         if (deltaX + deltaY + deltaZ > threshold) {
           setSnow(true);
-          playSound();
           setMessage("🎅 You shook it! ❄️ Snow is falling...");
         }
       }
