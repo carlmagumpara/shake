@@ -4,6 +4,7 @@ import React, { useEffect, useState } from "react";
 export default function ShakeDetector() {
   const [message, setMessage] = useState("Tap button to enable motion 🚀");
   const [enabled, setEnabled] = useState(false);
+  const [snow, setSnow] = useState(false);
 
   useEffect(() => {
     if (!enabled) return;
@@ -25,6 +26,7 @@ export default function ShakeDetector() {
         const deltaZ = Math.abs(z - lastZ);
 
         if (deltaX + deltaY + deltaZ > threshold) {
+          setSnow(true);
           setMessage("🎅 You shook it! ❄️ Snow is falling...");
         }
       }
@@ -66,19 +68,23 @@ export default function ShakeDetector() {
   };
 
   return (
-    <div className="flex flex-col items-center justify-center min-h-screen bg-red-50 text-center p-6">
-      <h1 className="text-3xl font-bold text-green-700 mb-4">
-        Shake Your Phone 🎄
-      </h1>
-      <p className="text-xl text-gray-800 mb-6">{message}</p>
-      {!enabled && (
-        <button
-          onClick={enableMotion}
-          className="px-6 py-3 rounded-2xl bg-green-600 text-white font-semibold shadow-md"
-        >
-          Enable Motion
-        </button>
-      )}
-    </div>
+    <>
+      {snow && Array.from({ length: Math.floor(1000 / 3) + 1 }, (_, i) => i * 3).map(v => <div className="snow"></div>)}
+      <div className="container">
+        <div className="landing">
+          <h1>
+            Shake Your Phone 🎄
+          </h1>
+          <p>{message}</p>
+          {!enabled && (
+            <button
+              onClick={enableMotion}
+            >
+              Enable Motion
+            </button>
+          )}
+        </div>
+      </div>
+    </>
   );
 }
