@@ -1,7 +1,10 @@
 import './App.css'
 import React, { useEffect, useState } from "react";
+import useSound from 'use-sound'
+import mySound from './assets/all_i_want_for_christmas_is_you_-_mariah_carey.mp3'
 
 export default function ShakeDetector() {
+  const [playSound] = useSound(mySound);
   const [message, setMessage] = useState("Tap button to enable motion 🚀");
   const [enabled, setEnabled] = useState(false);
   const [snow, setSnow] = useState(false);
@@ -27,6 +30,7 @@ export default function ShakeDetector() {
 
         if (deltaX + deltaY + deltaZ > threshold) {
           setSnow(true);
+          playSound();
           setMessage("🎅 You shook it! ❄️ Snow is falling...");
         }
       }
