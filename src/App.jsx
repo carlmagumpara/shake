@@ -50,9 +50,9 @@ export default function ShakeDetector() {
       lastZ = z;
 
       setData({
-        lastX,
-        lastY,
-        lastZ,
+        lastX: lastX ?? 0,
+        lastY: lastY ?? 0,
+        lastZ: lastZ ?? 0,
       });
     }
 
@@ -89,7 +89,18 @@ export default function ShakeDetector() {
 
   return (
     <>
-      {snow && Array.from({ length: Math.floor(1000 / 3) + 1 }, (_, i) => i * 3).map(v => <div className="snow"></div>)}
+      {snow && Array.from({ length: Math.floor(1000 / 3) + 1 }, (_, i) => i * 3).map(v => (
+        <div 
+          className="snow" 
+          style={{ 
+            left: Math.abs(data.lastX * 100).toFixed(0) + "%",
+            right: Math.abs(data.lastY * 100).toFixed(0) + "%",
+            top: Math.abs(data.lastZ * 100).toFixed(0) + "%",
+          }}
+        >
+   
+        </div>
+      ))}
       <div className="container">
         <div className="landing">
           <h1>
