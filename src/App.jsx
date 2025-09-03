@@ -107,7 +107,6 @@ export default function ShakeDetector() {
             Shake Your Phone 🎄
           </h1>
           <p>{message}</p>
-          <p>{JSON.stringify(data)}</p>
           {!enabled && (
             <button
               onClick={enableMotion}
