@@ -50,9 +50,9 @@ export default function ShakeDetector() {
       lastZ = z;
 
       setData({
-        lastX: lastX ?? 0,
-        lastY: lastY ?? 0,
-        lastZ: lastZ ?? 0,
+        lastX: Math.abs((lastX ?? 0) * 100).toFixed(0) + "%",
+        lastY: Math.abs((lastY ?? 0) * 100).toFixed(0) + "%",
+        lastZ: Math.abs((lastZ ?? 0) * 100).toFixed(0) + "%",
       });
     }
 
@@ -93,9 +93,9 @@ export default function ShakeDetector() {
         <div 
           className="snow" 
           style={{ 
-            left: Math.abs(data.lastX * 100).toFixed(0) + "%",
-            right: Math.abs(data.lastY * 100).toFixed(0) + "%",
-            top: Math.abs(data.lastZ * 100).toFixed(0) + "%",
+            // left: Math.abs(data.lastX * 100).toFixed(0) + "%",
+            // right: Math.abs(data.lastY * 100).toFixed(0) + "%",
+            // top: Math.abs(data.lastZ * 100).toFixed(0) + "%",
           }}
         >
    
