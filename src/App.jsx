@@ -8,6 +8,11 @@ export default function ShakeDetector() {
   const [message, setMessage] = useState("Tap button to enable motion 🚀");
   const [enabled, setEnabled] = useState(false);
   const [snow, setSnow] = useState(false);
+  const [data, setData] = useState({
+    lastX: 0,
+    lastY: 0,
+    lastZ: 0,
+  });
 
   useEffect(() => {
     if(snow) {
@@ -43,6 +48,12 @@ export default function ShakeDetector() {
       lastX = x;
       lastY = y;
       lastZ = z;
+
+      setData({
+        lastX,
+        lastY,
+        lastZ,
+      });
     }
 
     window.addEventListener("devicemotion", handleMotion);
@@ -85,6 +96,7 @@ export default function ShakeDetector() {
             Shake Your Phone 🎄
           </h1>
           <p>{message}</p>
+          <p>{JSON.stringify(data)}</p>
           {!enabled && (
             <button
               onClick={enableMotion}
